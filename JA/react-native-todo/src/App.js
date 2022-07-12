@@ -31,12 +31,7 @@ export default function App() {
     
     const width = Dimensions.get('window').width;
     const [newTask, setNewTask] = useState('');
-    const [tasks, setTasks] = useState({
-        '1' : {id: '1',text: '리액트 공부', completed: false},
-        '2' : {id: '1',text: '리액트 블로그 정리', completed: true},
-        '3' : {id: '1',text: '운동', completed: false},
-        '4' : {id: '1',text: '알고리즘 문제 풀기', completed: false},
-    });
+    const [tasks, setTasks] = useState({});
 
     //할 일 추가
     const _addTask = () => {
@@ -55,11 +50,19 @@ export default function App() {
         setTasks(currentTasks);
     };
 
+    //할 일 완료
     const _toggleTask = id => {
         const currentTasks = Object.assign({},tasks);
         currentTasks[id]['completed']=!currentTasks[id]['completed'];
         setTasks(currentTasks);
     }
+
+    //할 일 수정
+    const _updateTask = item => {
+        const currentTasks = Object.assign({},tasks);
+        currentTasks[item.id] = item;
+        setTasks(currentTasks);
+    };
     
     const _handleTextChange = text => {
         setNewTask(text);
@@ -80,7 +83,13 @@ export default function App() {
                     {Object.values(tasks)
                         .reverse()
                         .map(item => (
-                            <Task key={item.id} item={item} deleteTask={_deleteTask} toggleTask={_toggleTask} />
+                            <Task
+                                key={item.id}
+                                item={item}
+                                deleteTask={_deleteTask}
+                                toggleTask={_toggleTask}
+                                updateTask={_updateTask}
+                            />
                         ))}
                 </List>
                 {/* <IconButton type={images.uncompleted} />
