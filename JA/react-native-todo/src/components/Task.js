@@ -60,6 +60,7 @@ const Task = ({item, deleteTask, toggleTask, updateTask})=>{
                         onPressOut={toggleTask}
                         completed={item.completed} />
             <Contents completed={item.completed}>{item.text}</Contents>
+<<<<<<< HEAD
             {item.completed || (
             <IconButton
                 type={images.update} 
@@ -73,6 +74,11 @@ const Task = ({item, deleteTask, toggleTask, updateTask})=>{
                 onPressOut={deleteTask}
                 completed={item.completed}
             />
+=======
+            {item.completed || <IconButton type={images.update} />}
+            {/* <IconButton type={images.update} /> */}
+            <IconButton type={images.delete} id={item.id} onPressOut={deleteTask} completed={item.completed}/>
+>>>>>>> 429772a95a89a469e4afefa2a45a947a09d4fc68
         </Container>
     );
 };
