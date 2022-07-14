@@ -16,7 +16,7 @@ const StyledInput = styled.TextInput.attrs(({theme})=>({
     color: ${({ theme }) => theme.text};
 `;
 
-const Input = ({placeholder, value, onChangeText, onSubmitEditing}) => {
+const Input = ({placeholder, value, onChangeText, onSubmitEditing, onBlur}) => {
     const width = Dimensions.get('window').width;
 
     return (
@@ -30,7 +30,9 @@ const Input = ({placeholder, value, onChangeText, onSubmitEditing}) => {
         keyboardAppearance="dark"   /* 아이폰 키보드 색상 어둡게 설정 */
         value={value}
         onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}/>    
+        onSubmitEditing={onSubmitEditing}
+        onBlur={onBlur}
+        />    
     );
 };
 
@@ -39,6 +41,7 @@ Input.prototype = {
     value: PropTypes.string.isRequired,
     onChangeText: PropTypes.func.isRequired,
     onSubmitEditing: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
 }
 
 export default Input;
