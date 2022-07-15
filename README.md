@@ -1,7 +1,7 @@
 ## 💻리액트 네이티브 스터디
 + 기간 : 2022. 06. 27 ~ 2022. 07.31
 + 모바일 앱 배포 팀프로젝트에 앞서 필요한 개인 공부
-+ 하나의 Git 저장소를 통해 진행 상황 공유
++ Notion,Git을 통해 진행 상황 공유
 ***
 ## ✍️스터디 내용
 + <img src="https://img.shields.io/badge/React Native-61DAFB?style=flat-square&logo=React&logoColor=black"/>
