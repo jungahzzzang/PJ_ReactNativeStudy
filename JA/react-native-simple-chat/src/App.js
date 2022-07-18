@@ -7,6 +7,9 @@ import { ThemeProvider } from "styled-components";
 import { theme } from './theme';
 import Navigation from './navigations';
 import {images } from './utils/images';
+// import * as SplashScreen from "expo-splash-screen";
+
+// SplashScreen.preventAutoHideAsync().catch(console.warn);
 
 const cacheImages = images => {
     return images.map(image=>{

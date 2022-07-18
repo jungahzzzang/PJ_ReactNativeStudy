@@ -1,4 +1,12 @@
-import * as firebase from 'firebase';
-import config from '../../firebase.json';
+import {initializeApp} from 'firebase/app';
+import {getAuth} from 'firebase/auth';
+import config from '../firebase.json';
 
-const app = firebase.intializeApp(config);
+const app = initializeApp(config);
+
+const Auth = getAuth(app);
+
+export const login = async ({email, password}) => {
+    const {user} = await Auth.signInWithEmailAndPassword(email, password);
+    return user;
+}

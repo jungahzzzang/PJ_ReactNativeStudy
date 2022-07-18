@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, forwardRef} from "react";
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 
@@ -18,7 +18,7 @@ const Label = styled.Text`
 const StyledTextInput = styled.TextInput.attrs(({theme})=>({
     placeholderTextColor: theme.inputPlaceholder,
 }))`
-    background-color: ${({ theme })=>theme.text};
+    background-color: ${({ theme })=>theme.background};
     color: ${({theme})=>theme.text};
     padding: 20px 10px;
     font-size: 16px;
@@ -27,7 +27,8 @@ const StyledTextInput = styled.TextInput.attrs(({theme})=>({
     border-radius: 4px;
 `;
 
-const Input = ({
+const Input = forwardRef (
+    ({
     label,
     value,
     onChangeText,
@@ -37,13 +38,15 @@ const Input = ({
     isPassword,
     returnKeyType,
     maxLength,
-}) => {
+},
+    ref) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
         <Container>
             <Label isFocused={isFocused}>{label}</Label>
             <StyledTextInput
+                ref={ref}
                 isFocused={isFocused}
                 value={value}
                 onChangeText={onChangeText}
@@ -64,7 +67,8 @@ const Input = ({
             />
         </Container>
     );
-};
+}
+);
 
 Input.defaultProps = {
     onBlue: () => {},
