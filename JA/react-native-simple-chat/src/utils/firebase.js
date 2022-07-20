@@ -8,7 +8,7 @@
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import config from '../firebase.json';
+import config from '../../firebase.json';
 
 export const app = firebase.initializeApp(config);
 
@@ -56,4 +56,9 @@ export const signup = async ({email, password, name, photoUrl}) => {
     });
     return user;
 }
+
+//로그아웃
+export const logout = async() => {
+    return await authService.signOut();
+};
 

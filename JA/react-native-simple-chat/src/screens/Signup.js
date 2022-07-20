@@ -7,7 +7,7 @@ import {images} from '../utils/images';
 // import { Text } from 'react-native';
 import { Alert } from "react-native";
 import {signup} from '../utils/firebase';
-import { ProgressContext } from "../contexts";
+import { ProgressContext, UserContext } from "../contexts";
 
 const Container = styled.View`
     flex: 1;
@@ -28,6 +28,7 @@ const ErrorText = styled.Text`
 
 const Signup = () => {
     
+    const {dispatch} = useContext(UserContext);
     const {spinner} = useContext(ProgressContext);
 
     const [name, setName] = useState('');
@@ -74,7 +75,9 @@ const Signup = () => {
             spinner.start();
             const user = await signup({email, password, name, photoUrl});
             console.log(user);
-            Alert.alert('Signup Success', user.email);
+            //Alert.alert('Signup Success', user.email);
+            //회원가입 성공 시 UserContext의 user 상태가 변경되도록
+            dispatch(user);
         }catch(e){
             Alert.alert('Signup Error', e.message);
         }finally{

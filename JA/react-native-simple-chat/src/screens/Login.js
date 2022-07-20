@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, useContext} from "react";
-import { ProgressContext } from "../contexts";
+import { ProgressContext, UserContext } from "../contexts";
 import styled from "styled-components";
 //import { Button } from 'react-native';
 import { Image, Input, Button } from '../components';
@@ -32,6 +32,7 @@ const ErrorText = styled.Text`
 
 const Login = ({ navigation }) => {
 
+    const {dispatch} = useContext(UserContext);
     const insets = useSafeAreaInsets();
     const {spinner} = useContext(ProgressContext);
 
@@ -49,7 +50,9 @@ const Login = ({ navigation }) => {
         try{
             spinner.start();
             const user = await login({email, password});
-            Alert.alert('Login Success', user.email);
+            //Alert.alert('Login Success', user.email);
+            //인증되면 UserContext의 user를 수정하도록
+            dispatch(user);
         }catch(e){
             Alert.alert('Login Error', e.message);
         }finally{
