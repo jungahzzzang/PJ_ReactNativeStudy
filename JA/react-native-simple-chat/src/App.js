@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components";
 import { theme } from './theme';
 import Navigation from './navigations';
 import {images } from './utils/images';
+import { ProgressProvider } from "./contexts";
 // import * as SplashScreen from "expo-splash-screen";
 
 // SplashScreen.preventAutoHideAsync().catch(console.warn);
@@ -41,8 +42,10 @@ const App = () => {
 
     return isReady? (
         <ThemeProvider theme={theme}>
+            <ProgressProvider>
             <StatusBar barStyle="dark-content"/>
             <Navigation />
+            </ProgressProvider>
         </ThemeProvider>
     ) : (
         <AppLoading

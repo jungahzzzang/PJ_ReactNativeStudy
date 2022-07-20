@@ -1,10 +1,13 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect, useContext} from "react";
 import styled from "styled-components";
 import { Image, Input, Button } from "../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import {vaildateEmail, removeWhitespace} from '../utils/common';
+import {validateEmail, removeWhitespace} from '../utils/common';
 import {images} from '../utils/images';
 // import { Text } from 'react-native';
+import { Alert } from "react-native";
+import {signup} from '../utils/firebase';
+import { ProgressContext } from "../contexts";
 
 const Container = styled.View`
     flex: 1;
@@ -24,6 +27,8 @@ const ErrorText = styled.Text`
 `;
 
 const Signup = () => {
+    
+    const {spinner} = useContext(ProgressContext);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -43,7 +48,7 @@ const Signup = () => {
         let _errorMessage = '';
         if(!name){
             _errorMessage = 'Please enter your name.';
-        } else if (!vaildateEmail(email)) {
+        } else if (!validateEmail(email)) {
             _errorMessage = 'Please verify your email.';
         } else if (password.length < 6){
             _errorMessage = 'The password must contain 6 characters at least.';
@@ -64,7 +69,18 @@ const Signup = () => {
         );
     }, [name, email, password, passwordConfirm, errorMessage]);
 
-    const _handleSignupButtonPress = () => {};
+    const _handleSignupButtonPress = async () => {
+        try{
+            spinner.start();
+            const user = await signup({email, password, name, photoUrl});
+            console.log(user);
+            Alert.alert('Signup Success', user.email);
+        }catch(e){
+            Alert.alert('Signup Error', e.message);
+        }finally{
+            spinner.stop();
+        }
+    };
 
     return (
         <KeyboardAwareScrollView

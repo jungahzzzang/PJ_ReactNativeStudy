@@ -29,4 +29,8 @@ export const theme= {
 
      // Navigation
     headerTintColor: colors.black,
+
+    //Spinner
+    spinnerBackground: colors.black,
+    spinnerIndicator: colors.white,
 };
