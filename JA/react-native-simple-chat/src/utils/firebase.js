@@ -8,7 +8,7 @@
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import config from '../../firebase.json';
+import config from '../firebase.json';
 
 export const app = firebase.initializeApp(config);
 
@@ -62,3 +62,18 @@ export const logout = async() => {
     return await authService.signOut();
 };
 
+//현재 접속한 사용자 정보 반환
+export const getCurrentUser = () => {
+    const {uid, displayName, email, photoURL} = authService.currentUser;
+    return {uid, name: displayName, email, photoUrl: photoURL};
+};
+
+//사용자 사진 수정
+export const updateUserPhoto = async photoUrl => {
+    const user = authService.currentUser;
+    const storageUrl = photoUrl.startsWith('https')
+        ? photoUrl
+        : await uploadImage(photoUrl);
+    await user.updateProfile({photoURL: storageUrl});
+    return {name: user.displayName, email: user.email, photoUrl: user.photoURL};
+};

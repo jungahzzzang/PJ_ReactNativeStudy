@@ -21,14 +21,18 @@ export const theme= {
     label: colors.grey_1,
     inputPlaceholder: colors.grey_1,
     inputBorder: colors.grey_1,
+    inputDisabledBackground: colors.grey_0,
 
     //Button Component
     buttonBackground: colors.blue,
     buttonTitle: colors.white,
     buttonUnfilledTitle: colors.blue,
+    buttonLogout: colors.red,
 
      // Navigation
     headerTintColor: colors.black,
+    tabActiveColor: colors.blue,
+    tabInactiveColor: colors.grey_1,
 
     //Spinner
     spinnerBackground: colors.black,
