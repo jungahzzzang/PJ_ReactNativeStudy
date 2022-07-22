@@ -46,25 +46,27 @@ const Profile = () => {
         }
     };
 
-    return(
+    return (
         <Container>
-            <Image
-                url={photoUrl}
-                onChangeImage={_handlePhotoChange}
-                showButton
-                rounded
-            />
-            <Input label="Name" value={user.name} disabled />
-            <Input label="Email" value={user.email} disabled />
-            <Button
-                title="logout"
-                onPress={_handleLogoutButtonPress}
-                containerStyle={{marginTop: 30, backgroundColor: theme.buttonLogout}}
-            />
+          <Image
+            url={photoUrl}
+            onChangeImage={_handlePhotoChange}
+            showButton
+            rounded
+          />
+          <Input label="Name" value={user.name} disabled />
+          <Input label="Email" value={user.email} disabled />
+          <Button
+            title="logout"
+            onPress={_handleLogoutButtonPress}
+            containerStyle={{backgroundColor: theme.buttonLogout}}
+          />
         </Container>
-    );
-};
-
-export default Profile;
+      );
+    };
+    
+    export default Profile;
 
 //<Text style={{fontSize:24}}>Profile</Text>
+
+//containerStyle={{ marginTop: 30, backgroundColor: theme.buttonLogout }

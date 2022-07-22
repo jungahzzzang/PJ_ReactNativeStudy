@@ -9,6 +9,8 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import config from '../firebase.json';
+import {getFirestore, collection, doc, setDoc} from 'firebase/firestore';
+import 'firebase/compat/firestore';
 
 export const app = firebase.initializeApp(config);
 
@@ -77,3 +79,27 @@ export const updateUserPhoto = async photoUrl => {
     await user.updateProfile({photoURL: storageUrl});
     return {name: user.displayName, email: user.email, photoUrl: user.photoURL};
 };
+
+export const db = getFirestore(app);
+
+//DB 채널 생성
+export const createChannel = async ({title, description}) => {
+    const channelCollection = collection(db, 'channels');
+    const newChannelRef = doc(channelCollection);
+    const id = newChannelRef.id;
+    const newChannel = {
+        id,
+        title,
+        description,
+        createdAt: Date.now(),
+    };
+    await setDoc(newChannelRef, newChannel);
+    return id;
+};
+
+//메시지 전송
+export const createMessage = async ({channelId, message}) => {
+    const docRef = doc(db, `channels/${channelId}/messages`, message.id);
+    await setDoc(docRef, {...message, createdAt: Date.now()});
+}
+

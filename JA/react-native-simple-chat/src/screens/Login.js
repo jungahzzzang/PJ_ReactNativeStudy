@@ -46,6 +46,18 @@ const Login = ({ navigation }) => {
         setDisabled(!(email && password && !errorMessage));
     }, [email, password, errorMessage]);
 
+    const _handleEmailChange = email => {
+        const changedEmail = removeWhitespace(email);
+        setEmail(changedEmail);
+        setErrorMessage(
+            validateEmail(changedEmail) ? '' : 'Please verify your email'
+        );
+    };
+
+    const _handlePasswordChange = password => {
+        setPassword(removeWhitespace(password));
+    };
+
     const _handleLoginButtonPress = async () => {
         try{
             spinner.start();
@@ -60,19 +72,8 @@ const Login = ({ navigation }) => {
         }
     };
 
-    const _handleEmailChange = email => {
-        const changedEmail = removeWhitespace(email);
-        setEmail(changedEmail);
-        setErrorMessage(
-            validateEmail(changedEmail) ? '' : 'Please verify your email'
-        );
-    };
-
-    const _handlePasswordChange = password => {
-        setPassword(removeWhitespace(password));
-    };
-
     return(
+        // insets={insets}
         //활성화된 키보드를 닫음.
         // <TouchableWithoutFeedback onPress={Keyboard.didmiss}>
         <KeyboardAwareScrollView

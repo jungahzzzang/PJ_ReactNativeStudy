@@ -9,23 +9,23 @@ const Container = styled.View`
 `;
 
 const Label = styled.Text`
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: ${({theme, isFocused})=>(isFocused ? theme.text : theme.label)};
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: ${({ theme, isFocused }) => (isFocused ? theme.text : theme.label)};
 `;
 
-const StyledTextInput = styled.TextInput.attrs(({theme})=>({
-    placeholderTextColor: theme.inputPlaceholder,
+const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
+  placeholderTextColor: theme.inputPlaceholder,
 }))`
-    background-color: ${({ theme, editable })=>
-        editable ? theme.background : theme.inputDisabledBackground};
-    color: ${({theme})=>theme.text};
-    padding: 20px 10px;
-    font-size: 16px;
-    border: 1px solid
-        ${({theme, isFocused})=>(isFocused ? theme.text : theme.inputBorder)};
-    border-radius: 4px;
+  background-color: ${({ theme, editable }) =>
+    editable ? theme.background : theme.inputDisabledBackground};
+  color: ${({ theme }) => theme.text};
+  padding: 20px 10px;
+  font-size: 16px;
+  border: 1px solid
+    ${({ theme, isFocused }) => (isFocused ? theme.text : theme.inputBorder)};
+  border-radius: 4px;
 `;
 
 const Input = forwardRef (
@@ -46,40 +46,40 @@ const Input = forwardRef (
 
     return (
         <Container>
-            <Label isFocused={isFocused}>{label}</Label>
-            <StyledTextInput
-                ref={ref}
-                isFocused={isFocused}
-                value={value}
-                onChangeText={onChangeText}
-                onSubmitEditing={onSubmitEditing}
-                onFocus={()=>setIsFocused(true)}
-                onBlue={()=>{
-                    setIsFocused(false);
-                    onBlur()
-                }}
-                placeholder={placeholder}
-                secureTextEntry={isPassword}
-                returnKeyType={returnKeyType}
-                maxLength={maxLength}
-                autoCapitalize="none"
-                autoCorrect={false}
-                textContentType="none"  //iOS only
-                underlineColorAndroid="transparent" //Android only
-                editable={disabled}
-            />
+          <Label isFocused={isFocused}>{label}</Label>
+          <StyledTextInput
+            ref={ref}
+            isFocused={isFocused}
+            value={value}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => {
+              setIsFocused(false);
+              onBlur();
+            }}
+            placeholder={placeholder}
+            secureTextEntry={isPassword}
+            returnKeyType={returnKeyType}
+            maxLength={maxLength}
+            autoCapitalize="none"
+            autoCorrect={false}
+            textContentType="none" // iOS only
+            underlineColorAndroid="transparent" // Android only
+            editable={!disabled}
+          />
         </Container>
-    );
-}
-);
-
-Input.defaultProps = {
-    onBlue: () => {},
+      );
+    }
+  );
+  
+  Input.defaultProps = {
+    onBlur: () => {},
     onChangeText: () => {},
     onSubmitEditing: () => {},
-};
-
-Input.propTypes = {
+  };
+  
+  Input.propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChangeText: PropTypes.func,
@@ -87,9 +87,9 @@ Input.propTypes = {
     onBlur: PropTypes.func,
     placeholder: PropTypes.string,
     isPassword: PropTypes.bool,
-    returnKeyType: PropTypes.oneOf(['done','next']),
+    returnKeyType: PropTypes.oneOf(['done', 'next']),
     maxLength: PropTypes.number,
     disabled: PropTypes.bool,
-};
-
-export default Input;
+  };
+  
+  export default Input;
