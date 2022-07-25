@@ -70,7 +70,7 @@ const Channel = ({navigation, route}) => {
     const _handleMessageSend = async messageList => {
         const newMessage = messageList[0];
         try{
-            await createMessage({channelId: params.id, message: newMessage});
+            await createMessage({channelId: route.params.id, message: newMessage});
         }catch(e){
             Alert.alert('Send Message Error', e.message);
         }

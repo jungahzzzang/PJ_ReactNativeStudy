@@ -25,7 +25,7 @@ const Title = styled.Text`
 const Button = ({containerStyle, title, onPress, isFilled, disabled}) => {
     return (
         <Container
-            styled={containerStyle}
+            style={containerStyle}
             onPress={onPress}
             isFilled={isFilled}
             disabled={disabled}
